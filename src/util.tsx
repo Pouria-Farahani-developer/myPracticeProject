@@ -3,8 +3,8 @@ export const config = [
         keyName: 'page1',
         rendering: (
             <div>
-                <h2>صفحه اول</h2>
-                <p>محتوای صفحه اول اینجا قرار می‌گیرد</p>
+                <h2>First Step</h2>
+                <p>Content of First Step</p>
             </div>
         ),
         onNext:() => console.log('page1'),
@@ -14,8 +14,8 @@ export const config = [
         keyName: 'page2',
         rendering: (
             <div>
-                <h2>صفحه دوم</h2>
-                <p>محتوای صفحه دوم اینجا قرار می گیرد</p>
+                <h2>Second Step</h2>
+                <p>Content of Second Step</p>
             </div>
         ),
         onNext:() => console.log('page2'),
@@ -25,8 +25,8 @@ export const config = [
         keyName: 'page3',
         rendering: (
             <div>
-                <h2>صفحه سوم</h2>
-                <p>محتوای صفحه سوم اینجا قرار می گیرد</p>
+                <h2>Third Step</h2>
+                <p>Content Of Third Step</p>
             </div>
         ),
         onNext:() => console.log('page3'),
@@ -36,8 +36,8 @@ export const config = [
         keyName: 'page4',
         rendering: (
             <div>
-                <h2>صفحه چهارم</h2>
-                <p>محتوای صفحه چهارم اینجا قرار می گیرد</p>
+                <h2>Fourth Step</h2>
+                <p>Content Of Fourth Step</p>
             </div>
         ),
         onNext:() => console.log('page4'),

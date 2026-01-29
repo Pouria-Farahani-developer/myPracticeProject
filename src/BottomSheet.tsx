@@ -157,14 +157,14 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
                         onClick={handleBack}
                         disabled={isFirstPage}
                     >
-                        قبلی
+                        Before
                     </button>
                     <button
                         className="btn-primary"
                         onClick={handleNext}
                         disabled={isLastPage}
                     >
-                        {isLastPage ? 'اتمام' : 'بعدی'}
+                        {isLastPage ? 'Complete' : 'Next'}
                     </button>
                 </div>
             </div>
