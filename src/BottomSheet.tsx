@@ -15,6 +15,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
     const isNavigatingBack = useRef(false);
 
+    const hasCleanedOnMount = useRef(false);
+
+
     const cleanupAndClose = useCallback(() => {
         const cleanUrl = new URL(window.location.href);
 
@@ -28,6 +31,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         onClose();
     }, [onClose]);
 
+
+    useEffect(() => {
+        if (!hasCleanedOnMount.current) {
+            cleanupAndClose()
+        }
+    }, []);
 
     // Push URL برای همه step‌ها تا initialStep
     useEffect(() => {
@@ -99,7 +108,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     };
 
     const handleClose = () => {
-        // محاسبه تعداد step‌هایی که باید برگردیم
         const stepsToGoBack = currentStep + 1;
         window.history.go(-stepsToGoBack);
     };
