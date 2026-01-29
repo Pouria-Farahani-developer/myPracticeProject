@@ -6,6 +6,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({config , navigation}) => {
 
     const {step , backwardStep , forwardStep} = navigation;
 
+
     if(step !== null){
         return (
             <>

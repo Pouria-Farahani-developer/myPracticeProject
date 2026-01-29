@@ -2,7 +2,7 @@ import {useEffect, useReducer} from "react";
 import {config} from "./util.tsx";
 import type {navigationProps} from "./types.ts";
 
-export const useNavigation  = () : navigationProps => {
+export const useUrlNavigation  = () : navigationProps => {
     const [, fakeRerender] = useReducer(() => ({}), {});
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const useNavigation  = () : navigationProps => {
                 const editedStep = step + 1;
                 newUrl.searchParams.set('step', `${editedStep}`);
                 window.history.pushState(
-                    { step: editedStep, bottomSheet: true },
+                    {},
                     '',
                     newUrl.toString()
                 )
@@ -60,7 +60,7 @@ export const useNavigation  = () : navigationProps => {
                 const editedStep = step - 1;
                 newUrl.searchParams.set('step', `${editedStep}`);
                 window.history.pushState(
-                    { step: editedStep, bottomSheet: true },
+                    {},
                     '',
                     newUrl.toString()
                 );
@@ -82,7 +82,7 @@ export const useNavigation  = () : navigationProps => {
 
         newUrl.searchParams.set('step', `${step}`);
         window.history.pushState(
-            { step: step, bottomSheet: true },
+            {},
             '',
             newUrl.toString()
         )
