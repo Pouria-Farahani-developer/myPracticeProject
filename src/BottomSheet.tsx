@@ -38,7 +38,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         }
     }, []);
 
-    // Push URL برای همه step‌ها تا initialStep
+
+    // Push URL برای صفحات بعد از initialStep
     useEffect(() => {
         if (isOpen && !hasInitialUrlPushed.current) {
             // Push کردن همه step‌ها از 0 تا initialStep
@@ -53,10 +54,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
             }
             hasInitialUrlPushed.current = true;
         }
-    }, [isOpen, config, initialStep]);
 
-    // Push URL برای صفحات بعد از initialStep
-    useEffect(() => {
+
         if (
             isOpen &&
             hasInitialUrlPushed.current &&
