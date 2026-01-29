@@ -12,6 +12,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     const [currentStep, setCurrentStep] = useState(initialStep);
 
     const hasInitialUrlPushed = useRef(false);
+
     const isNavigatingBack = useRef(false);
 
     const cleanupAndClose = useCallback(() => {
@@ -28,26 +29,29 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     }, [onClose]);
 
 
-    // Push URL فقط برای صفحه اول - یک بار
+    // Push URL برای همه step‌ها تا initialStep
     useEffect(() => {
         if (isOpen && !hasInitialUrlPushed.current) {
-            const newUrl = new URL(window.location.href);
-            newUrl.searchParams.set('step', config[0].keyName);
-            window.history.pushState(
-                { step: 0, bottomSheet: true },
-                '',
-                newUrl.toString()
-            );
+            // Push کردن همه step‌ها از 0 تا initialStep
+            for (let i = 0; i <= initialStep; i++) {
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('step', config[i].keyName);
+                window.history.pushState(
+                    { step: i, bottomSheet: true },
+                    '',
+                    newUrl.toString()
+                );
+            }
             hasInitialUrlPushed.current = true;
         }
-    }, [isOpen, config]);
+    }, [isOpen, config, initialStep]);
 
-    // Push URL برای صفحات 2 به بعد
+    // Push URL برای صفحات بعد از initialStep
     useEffect(() => {
         if (
             isOpen &&
             hasInitialUrlPushed.current &&
-            currentStep > 0 &&
+            currentStep > initialStep &&
             !isNavigatingBack.current
         ) {
             const newUrl = new URL(window.location.href);
@@ -59,7 +63,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
             );
         }
         isNavigatingBack.current = false;
-    }, [currentStep, isOpen, config]);
+    }, [currentStep, isOpen, config, initialStep]);
 
     // Handle browser back button
     useEffect(() => {
@@ -96,7 +100,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
     const handleClose = () => {
         // محاسبه تعداد step‌هایی که باید برگردیم
-        // اگر در صفحه 3 هستیم: step 3, step 2, step 1, step 0 = 4 تا
         const stepsToGoBack = currentStep + 1;
         window.history.go(-stepsToGoBack);
     };

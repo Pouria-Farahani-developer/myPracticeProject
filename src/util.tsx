@@ -13,10 +13,7 @@ export const config = [
         rendering: (
             <div>
                 <h2>صفحه دوم</h2>
-                <form>
-                    <input type="text" placeholder="نام" />
-                    <input type="email" placeholder="ایمیل" />
-                </form>
+                <p>محتوای صفحه دوم اینجا قرار می گیرد</p>
             </div>
         )
     },
@@ -25,7 +22,7 @@ export const config = [
         rendering: (
             <div>
                 <h2>صفحه سوم</h2>
-                <p>تایید نهایی</p>
+                <p>محتوای صفحه سوم اینجا قرار می گیرد</p>
             </div>
         )
     },
@@ -34,7 +31,7 @@ export const config = [
         rendering: (
             <div>
                 <h2>صفحه چهارم</h2>
-                <p>تایید نهایی</p>
+                <p>محتوای صفحه چهارم اینجا قرار می گیرد</p>
             </div>
         )
     }
