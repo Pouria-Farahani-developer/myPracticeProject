@@ -15,9 +15,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
     const isNavigatingBack = useRef(false);
 
-    const hasCleanedOnMount = useRef(false);
-
-
     const cleanupAndClose = useCallback(() => {
         const cleanUrl = new URL(window.location.href);
 
@@ -33,16 +30,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
 
     useEffect(() => {
-        if (!hasCleanedOnMount.current) {
             cleanupAndClose()
-        }
     }, []);
 
 
-    // Push URL برای صفحات بعد از initialStep
     useEffect(() => {
         if (isOpen && !hasInitialUrlPushed.current) {
-            // Push کردن همه step‌ها از 0 تا initialStep
             for (let i = 0; i <= initialStep; i++) {
                 const newUrl = new URL(window.location.href);
                 newUrl.searchParams.set('step', config[i].keyName);
@@ -73,7 +66,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         isNavigatingBack.current = false;
     }, [currentStep, isOpen, config, initialStep]);
 
-    // Handle browser back button
     useEffect(() => {
         const handlePopState = (event: PopStateEvent) => {
             if (event.state?.bottomSheet) {
@@ -88,7 +80,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         return () => window.removeEventListener('popstate', handlePopState);
     }, [cleanupAndClose]);
 
-    // Reset when closed
     useEffect(() => {
         if (!isOpen) {
             setCurrentStep(initialStep);
@@ -97,23 +88,34 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     }, [isOpen, initialStep]);
 
     const handleNext = async () => {
-        if (currentStep < config.length - 1) {
-            const currentPage = config[currentStep];
-            if (currentPage.onNext) {
-                await currentPage.onNext();
-            }
+        const currentPage = config[currentStep];
+        const isLastPage = currentStep === config.length - 1;
 
+        if (currentPage.onNext) {
+            await currentPage.onNext();
+        }
+
+        if (isLastPage) {
+            handleClose();
+        } else {
             setCurrentStep(prev => prev + 1);
         }
     };
 
+
     const handleBack = async () => {
         const currentPage = config[currentStep];
+        const isFirstPage = currentStep === 0;
+
         if (currentPage.onBack) {
             await currentPage.onBack();
         }
 
-        window.history.back();
+        if (isFirstPage) {
+            handleClose();
+        } else {
+            window.history.back();
+        }
     };
 
     const handleClose = () => {
@@ -124,7 +126,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     if (!isOpen) return null;
 
     const currentPage = config[currentStep];
-    const isFirstPage = currentStep === 0;
     const isLastPage = currentStep === config.length - 1;
 
     return (
@@ -135,7 +136,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
                     <button
                         className="back-button"
                         onClick={handleBack}
-                        disabled={isFirstPage}
                     >
                         ←
                     </button>
@@ -155,14 +155,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
                     <button
                         className="btn-secondary"
                         onClick={handleBack}
-                        disabled={isFirstPage}
                     >
                         Before
                     </button>
                     <button
                         className="btn-primary"
                         onClick={handleNext}
-                        disabled={isLastPage}
                     >
                         {isLastPage ? 'Complete' : 'Next'}
                     </button>

@@ -19,6 +19,7 @@ const App = () => {
                 <BottomSheet
                     config={config}
                     isOpen={isOpen}
+                    initialStep={2}
                     onClose={() => setIsOpen(false)}
                 />
             </div>
