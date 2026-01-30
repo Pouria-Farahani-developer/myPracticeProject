@@ -7,7 +7,7 @@ export interface BottomSheetStep{
     onBack?: () => void | Promise<void>;
 }
 
-export interface navigationProps {
+export interface NavigationProps {
     step: number | null;
     forwardStep: () => void;
     backwardStep: () => void;
@@ -16,5 +16,5 @@ export interface navigationProps {
 
 export interface BottomSheetProps {
     config: BottomSheetStep[];
-    navigation : navigationProps;
+    navigation : NavigationProps;
 }

@@ -1,1 +1,1 @@
-export * from './types.ts'
+export * from './general-types/general-types.ts'

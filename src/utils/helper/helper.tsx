@@ -1,4 +1,4 @@
-import type { BottomSheetStep} from "../types";
+import type { BottomSheetStep} from "../../types";
 
 export const config : BottomSheetStep[] = [
     {

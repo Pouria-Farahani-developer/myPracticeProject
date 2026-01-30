@@ -1,4 +1,4 @@
-import {STEP} from "./const.ts";
+import {STEP} from "../const/const.ts";
 
 export const getValidStep = (step: null | string, configLength: number) => {
     if (step !== null && !Number.isNaN(+step) && +step <= configLength && +step > 0) {
