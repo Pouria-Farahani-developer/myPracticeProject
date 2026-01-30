@@ -1,4 +1,6 @@
-export const config = [
+import type { BottomSheetStep} from "../types";
+
+export const config : BottomSheetStep[] = [
     {
         keyName: '1',
         rendering: (

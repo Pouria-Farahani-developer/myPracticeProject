@@ -1,2 +1,2 @@
-export const STEP = 'step'
-export const INITIAL_STEP = 1;
+export const STEP = 'step' as const;
+export const INITIAL_STEP : number = 1;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './BottomSheet.module.css';
 
-import type {BottomSheetProps} from "../../types/types.ts";
+import type {BottomSheetProps} from "../../types";
 
 const BottomSheet: React.FC<BottomSheetProps> = ({config , navigation}) => {
 
