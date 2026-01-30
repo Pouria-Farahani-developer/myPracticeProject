@@ -14,13 +14,16 @@ const App = () => {
     // Use this line if you want to treat the localStorage as the source of truth for state
     // const navigation = useLocalStorageNavigation()
 
-    return (
-        <div className={styles['mobile-wrapper']}>
-            <div className={styles['mobile-container']}>
+    const handleClick = () => {
+        navigation.setCustomStep(INITIAL_STEP)
+    }
 
+    return (
+        <div className={styles['mobile-container']}>
+            <div className={styles['mobile-row']}>
                 <div className={styles['mobile-content']}>
                     <button
-                        onClick={() => navigation.setCustomStep(INITIAL_STEP)}
+                        onClick={handleClick}
                         className={styles['open-button']}
                     >
                         Open Bottom Sheet

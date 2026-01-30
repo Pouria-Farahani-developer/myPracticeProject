@@ -14,6 +14,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({config , navigation}) => {
         return (
             <>
                 <div className={styles['bottom-sheet-overlay']}  />
+
                 <div className={styles['bottom-sheet']}>
                     <div className={styles['bottom-sheet-header']}>
                         <button
