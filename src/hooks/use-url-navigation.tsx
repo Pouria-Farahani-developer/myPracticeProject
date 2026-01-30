@@ -1,8 +1,8 @@
 import {useEffect, useReducer} from "react";
-import {config} from "../utils/util.tsx";
+import {getValidStep, pushBaseUrl, updateStepQuery, maxAllowedStep , STEP} from "../utils";
 import type {navigationProps} from "../types/types.ts";
 
-export const useUrlNavigation  = () : navigationProps => {
+export const useUrlNavigation = (): navigationProps => {
     const [, fakeRerender] = useReducer(() => ({}), {});
 
     useEffect(() => {
@@ -10,40 +10,21 @@ export const useUrlNavigation  = () : navigationProps => {
         return () => window.removeEventListener('popstate', fakeRerender);
     }, []);
 
-    const configLength = config.length;
 
-    const cleanUrl = new URL(window.location.href);
+    const currentUrl: URL = new URL(window.location.href);
 
-    const currentStep = () => {
-        const step = cleanUrl.searchParams.get('step');
-        if (step !== null && !Number.isNaN(+step) && +step <= configLength && +step > 0) {
-            return +step;
-        }
-        return null;
-    }
+    const stepParam: string | null = currentUrl.searchParams.get(STEP);
 
-
-    const step = currentStep();
-
-
+    const step: number | null = getValidStep(stepParam, maxAllowedStep);
 
     const forwardStep = () => {
         const newUrl = new URL(window.location.href);
-        if(step !== null) {
-            if(step === configLength) {
-                newUrl.searchParams.delete('step');
-                newUrl.search = '';
-                newUrl.hash = '';
-
-                window.history.pushState({}, '', newUrl.toString());
+        if (step !== null) {
+            if (step === maxAllowedStep) {
+                pushBaseUrl(newUrl);
             } else {
-                const editedStep = step + 1;
-                newUrl.searchParams.set('step', `${editedStep}`);
-                window.history.pushState(
-                    {},
-                    '',
-                    newUrl.toString()
-                )
+                const stepQuery = step + 1;
+                updateStepQuery(stepQuery, newUrl)
             }
 
             fakeRerender();
@@ -55,22 +36,15 @@ export const useUrlNavigation  = () : navigationProps => {
 
     const backwardStep = () => {
         const newUrl = new URL(window.location.href);
-        if(step !== null) {
-            if(step > 1){
-                const editedStep = step - 1;
-                newUrl.searchParams.set('step', `${editedStep}`);
-                window.history.pushState(
-                    {},
-                    '',
-                    newUrl.toString()
-                );
+        if (step !== null) {
+            if (step > 1) {
+                const stepQuery = step - 1;
 
-            }else{
-                newUrl.searchParams.delete('step');
-                newUrl.search = '';
-                newUrl.hash = '';
+                updateStepQuery(stepQuery, newUrl)
 
-                window.history.pushState({}, '', newUrl.toString());
+
+            } else {
+                pushBaseUrl(newUrl)
             }
             fakeRerender();
         }
@@ -79,18 +53,11 @@ export const useUrlNavigation  = () : navigationProps => {
 
     const setCustomStep = (step: number) => {
         const newUrl = new URL(window.location.href);
-
-        newUrl.searchParams.set('step', `${step}`);
-        window.history.pushState(
-            {},
-            '',
-            newUrl.toString()
-        )
-
+        updateStepQuery(step, newUrl)
         fakeRerender()
     }
 
 
-    return {backwardStep, forwardStep , setCustomStep ,step };
+    return {backwardStep, forwardStep, setCustomStep, step};
 
 }

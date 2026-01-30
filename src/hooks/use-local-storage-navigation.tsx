@@ -1,32 +1,23 @@
 import {useReducer} from "react";
-import {config} from "../utils/util.tsx";
+import {getValidStep, maxAllowedStep, STEP} from "../utils";
 import type {navigationProps} from "../types/types.ts";
 
 export const useLocalStorageNavigation = (): navigationProps => {
     const [, fakeRerender] = useReducer(() => ({}), {});
 
-    const configLength = config.length;
 
+    const stepFromStorage : string | null = localStorage.getItem(STEP)
 
-    const currentStep = () => {
-        const step = localStorage.getItem('step')
-        if (step !== null && !Number.isNaN(+step) && +step <= configLength && +step > 0) {
-            return +step;
-        }
-        return null;
-    }
-
-
-    const step = currentStep();
+    const step : number | null = getValidStep(stepFromStorage,maxAllowedStep);
 
 
     const forwardStep = () => {
         if (step !== null) {
-            if (step === configLength) {
-                localStorage.removeItem('step');
+            if (step === maxAllowedStep) {
+                localStorage.removeItem(STEP);
             } else {
-                const editedStep = step + 1;
-                localStorage.setItem('step', `${editedStep}`);
+                const targetStep = step + 1;
+                localStorage.setItem(STEP, `${targetStep}`);
             }
 
             fakeRerender();
@@ -39,10 +30,10 @@ export const useLocalStorageNavigation = (): navigationProps => {
     const backwardStep = () => {
         if (step !== null) {
             if (step > 1) {
-                const editedStep = step - 1;
-                localStorage.setItem('step', `${editedStep}`);
+                const targetStep = step - 1;
+                localStorage.setItem(STEP, `${targetStep}`);
             } else {
-                localStorage.removeItem('step');
+                localStorage.removeItem(STEP);
             }
             fakeRerender();
         }
@@ -50,7 +41,7 @@ export const useLocalStorageNavigation = (): navigationProps => {
     }
 
     const setCustomStep = (step: number) => {
-        localStorage.setItem('step', `${step}`)
+        localStorage.setItem(STEP, `${step}`)
 
         fakeRerender()
     }

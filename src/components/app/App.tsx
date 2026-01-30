@@ -1,9 +1,9 @@
-import {useUrlNavigation} from "../../hooks/use-url-navigation.tsx";
-// import {useLocalStorageNavigation} from "./use-local-storage-navigation.tsx";
-
-import { config } from "../../utils/util.tsx";
-
 import BottomSheet from '../bottom-sheet/BottomSheet.tsx';
+
+import {useUrlNavigation , useLocalStorageNavigation} from "../../hooks";
+
+import {config} from "../../utils";
+
 import './App.css';
 
 const App = () => {

@@ -7,7 +7,7 @@ export const config = [
                 <p>Content of First Step</p>
             </div>
         ),
-        onNext:() => console.log('hi, From Step 1'),
+        onNext: () => console.log('hi, From Step 1'),
         onBack: () => console.log('hi, From Step 1')
     },
     {
@@ -18,7 +18,7 @@ export const config = [
                 <p>Content of Second Step</p>
             </div>
         ),
-        onNext:() => console.log('hi, From Step 2'),
+        onNext: () => console.log('hi, From Step 2'),
         onBack: () => console.log('hi, From Step 2')
     },
     {
@@ -29,7 +29,7 @@ export const config = [
                 <p>Content Of Third Step</p>
             </div>
         ),
-        onNext:() => console.log('hi, From Step 3'),
+        onNext: () => console.log('hi, From Step 3'),
         onBack: () => console.log('hi, From Step 3')
     },
     {
@@ -40,7 +40,9 @@ export const config = [
                 <p>Content Of Fourth Step</p>
             </div>
         ),
-        onNext:() => console.log('hi, From Step 4'),
+        onNext: () => console.log('hi, From Step 4'),
         onBack: () => console.log('hi, From Step 4')
     }
 ];
+
+export const maxAllowedStep : number = config.length;
