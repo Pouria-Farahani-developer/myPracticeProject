@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface BottomSheetStep{
-    keyName: string;
+    key: number;
     rendering: React.ReactNode;
     onNext?: () => void | Promise<void>;
     onBack?: () => void | Promise<void>;

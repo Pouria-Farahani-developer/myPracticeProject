@@ -1,6 +1,6 @@
 import {useReducer} from "react";
 import {getValidStep, maxAllowedStep, STEP} from "../utils";
-import type {navigationProps} from "../types/types.ts";
+import type {navigationProps} from "../types";
 
 export const useLocalStorageNavigation = (): navigationProps => {
     const [, fakeRerender] = useReducer(() => ({}), {});

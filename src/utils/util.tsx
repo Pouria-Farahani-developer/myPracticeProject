@@ -2,7 +2,7 @@ import type { BottomSheetStep} from "../types";
 
 export const config : BottomSheetStep[] = [
     {
-        keyName: '1',
+        key: 1,
         rendering: (
             <div>
                 <h2>First Step</h2>
@@ -13,7 +13,7 @@ export const config : BottomSheetStep[] = [
         onBack: () => console.log('hi, From Step 1')
     },
     {
-        keyName: '2',
+        key: 2,
         rendering: (
             <div>
                 <h2>Second Step</h2>
@@ -24,7 +24,7 @@ export const config : BottomSheetStep[] = [
         onBack: () => console.log('hi, From Step 2')
     },
     {
-        keyName: '3',
+        key: 3,
         rendering: (
             <div>
                 <h2>Third Step</h2>
@@ -35,7 +35,7 @@ export const config : BottomSheetStep[] = [
         onBack: () => console.log('hi, From Step 3')
     },
     {
-        keyName: '4',
+        key: 4,
         rendering: (
             <div>
                 <h2>Fourth Step</h2>
