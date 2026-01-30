@@ -1,4 +1,4 @@
-import BottomSheet from '../bottom-sheet/BottomSheet.tsx';
+import BottomSheet from '../bottom-sheet/Bottom-sheet.tsx';
 
 import {useUrlNavigation} from "../../hooks";
 

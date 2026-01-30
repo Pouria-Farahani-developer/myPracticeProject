@@ -1,8 +1,8 @@
 import {useEffect, useReducer} from "react";
+import type {NavigationProps} from "../../types";
 import {getValidStep, pushBaseUrl, updateStepQuery, maxAllowedStep , STEP} from "../../utils";
-import type {navigationProps} from "../../types";
 
-export const useUrlNavigation = (): navigationProps => {
+export const useUrlNavigation = (): NavigationProps => {
     const [, fakeRerender] = useReducer(() => ({}), {});
 
     useEffect(() => {

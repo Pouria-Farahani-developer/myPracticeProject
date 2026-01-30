@@ -1,8 +1,9 @@
 import React from 'react';
 
-import styles from './BottomSheet.module.css';
-
 import type {BottomSheetProps} from "../../types";
+
+import styles from './Bottom-sheet.module.css';
+
 
 const BottomSheet: React.FC<BottomSheetProps> = ({config , navigation}) => {
 
